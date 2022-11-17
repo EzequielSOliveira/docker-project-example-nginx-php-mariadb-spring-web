@@ -1,0 +1,3057 @@
+/*
+
+. ROOT
+. RESET
+. GRID
+. TOOL
+. ANIMATION
+. INPUT
+. MARGIN TOP
+. MARGIN BOTTOM
+. LINK DEFAULT
+. ASPECT RATIO
+. BLOCKQUOTE
+. BORDERED BOX
+. BUTTON
+. DROPDOWN
+. FEATURED
+. HEADLINE DEFAULT
+. HEADLINE CALL
+. INPUT
+. LIST
+. NAVBAR
+. STRUCTURE
+. STYLE
+. TIMELINE
+. ICON
+. AJAX
+. INPUT AJEITAR
+. APP NAVBAR
+. MENU BAR
+. FORM MULTI LIST
+. TABLE
+. FOOTER
+. NAVIGATION SAMPLE LIST
+. NAVIGATION SAMPLE LINK
+. NAVIGATION FULL CONTENT
+. NAVIGATION PANEL CONTENT
+. NAVIGATION SAMPLE SOCIAL
+. LIST MANAGER DEFAULT
+. PRESENTATION DEFAULT
+. PRESENTATION PROJECT
+. NOTICE DEFAULT
+. CARD INFORMATION
+. CARD PRESENTATION
+. COLOR
+. BACKGROUND THEME
+. BACKGROUND GRADIENT DEFAULT
+. BACKGROUND GRADIENT GOLD
+. BACKGROUND SAMPLE
+. COMMENT DEFAULT
+. COMMENT INFORMATION
+. TEXT BOX HELP
+. TAB SAMPLE CONTENT
+. ANIMATION
+. MENU PANEL
+
+*/
+
+/* =================================== ROOT =================================== */
+:root {
+    /* Default colors */
+    --transparent: transparent;
+    --white: #ffffff;
+    --black: #000000;
+    
+    /* Orange Theme Color Template */
+    /*--color-theme-main: #fd6d68;
+    --color-theme-light: #f8a04e;
+    --color-theme-alternate: #fc9651;
+    --color-theme-shadow: rgba(252, 150, 81, 0.35);*/
+    
+    --color-theme-main: hsl(227, 72%, 60%);
+    --color-theme-light: hsl(227, 72%, 70%); /* hsl(227, 72%, 55%) */
+    --color-theme-alternate: #fd6d68;
+    --color-theme-shadow: #ccc;
+
+    /* THEMA 1.0 */
+    --primary: #2b85e7;
+    --success: #4caf50;
+    --warning: #faa00a;
+    --danger: #ff281e;
+
+    --themeColor01: #eceff1;
+    --themeColor02: #cfd8dc;
+    --themeColor03: #b0bec5;
+    --themeColor04: #90a4ae;
+    --themeColor05: #78909c;
+    --themeColor06: #607d8b;
+    --themeColor07: #546e7a;
+    --themeColor08: #455a64;
+    --themeColor09: #37474f;
+    --themeColor10: #263238;
+    
+    --themeBackground: hsl(0, 0%, 100%);
+    --firstTheme: hsla(240, 50%, 50%, 1);
+    --firstTheme06: hsla(240, 50%, 50%, 0.6);
+    --lastTheme: hsla(240, 50%, 25%, 1);
+}
+
+/* =================================== /ROOT =================================== */
+
+/* =================================== RESET =================================== */
+
+/*::-webkit-input-placeholder {
+    font-size: 0.95em;
+    color: var(--themeColor05);
+}
+
+!* Firefox < 19 *!
+:-moz-placeholder {
+    font-size: 0.95em;
+    color: var(--themeColor05);
+}
+
+!* Firefox > 19 *!
+::-moz-placeholder {
+    font-size: 0.95em;
+    color: var(--themeColor05);
+}
+
+!* Internet Explorer 10 *!
+:-ms-input-placeholder {
+    font-size: 0.95em;
+    color: var(--themeColor05);
+}
+
+::placeholder {
+    font-size: 0.95em;
+    color: var(--themeColor05);
+}*/
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.25em;
+    height: 0.25em;
+}
+
+/* Track - Parte que sobre da rolagem */
+::-webkit-scrollbar-track {
+    background: var(--themeColor04);
+}
+
+/* Handle - A rolagem */
+::-webkit-scrollbar-thumb {
+    background: var(--themeColor08);
+}
+
+/* Handle on hover - Quando passa o mouse */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--themeColor06);
+}
+
+::selection {
+    color: var(--white);
+    background: var(--themeColor05);
+}
+
+:disabled {
+    cursor: not-allowed;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+/**
+ * Definições básicas gerais do ocumento html.
+*/
+html {
+    font-family: 'Nunito', sans-serif;
+    word-wrap: break-word;
+    word-break: break-word; /* Analisar: pode causar erros na quebra da estrutura do flex */
+    hyphens: auto;
+    line-height: 1.5;
+    /*color: var(--themeColor05);*/
+    color: #555;
+}
+
+/*html {
+    font-size: 1vh;
+    letter-spacing: 0.1vh;
+}*/
+
+/*@media screen and (orientation: landscape)*/
+/* @media screen and (min-aspect-ratio: 121/80) TRY THIS CASE HAVE INCOMPATIBILITY */
+/*@media screen and (min-aspect-ratio: 13/9)*/
+/*@media all and (orientation: landscape) {
+    html {
+        font-size: 1vw;
+    }
+}*/
+
+/*@media all and (orientation: landscape) and (max-width: 512px) {
+    html {
+        font-size: 1.5vw;
+    }
+}*/
+
+/*@media all and (orientation: landscape)  and (max-height: 512px) {
+    html {
+        font-size: 1.5vw;
+    }
+}*/
+
+/*@media screen and (orientation: portrait)*/
+/*@media screen and (max-aspect-ratio: 121/80) TRY THIS CASE HAVE INCOMPATIBILITY */
+/*@media screen and (max-aspect-ratio: 13/9)*/
+/*@media all and (orientation: portrait) {
+    html {
+        font-size: 1vh;
+    }
+}*/
+
+html {
+    font-size: 1vw;
+}
+
+@media (max-width: 1024px) {
+    body {
+        font-size: 400%;
+    }
+}
+
+body {
+    letter-spacing: 0.015em;
+}
+
+body.loading {
+    cursor: progress;
+}
+
+hr {
+    border: 0.05rem solid;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, blockquote, input {
+    margin: 0;
+}
+
+input, button, textarea, select, table {
+    font-size: inherit;
+    line-height: inherit;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 0;
+}
+
+input {
+    vertical-align: middle;
+}
+
+input, select, textarea {
+    font-family: inherit;
+    color: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+legend, fieldset {
+    padding: 0;
+    margin: 0;
+}
+
+legend {
+    font-size: 150%;
+    font-weight: bold;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+button {
+    color: inherit;
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/**
+ * Define a largura padrão das imagens.
+*/
+img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle; /* alinha dentro de outos elementos como textos */
+    fill: currentColor;
+}
+
+/**
+ * Habilita a quebra de linha.
+*/
+pre {
+    white-space: pre-wrap;
+}
+
+/**
+ * Estilo padrão de listas não ordenadas.
+*/
+ul {
+    padding-left: 4%;
+}
+
+input[type=radio],
+input[type="checkbox"] {
+    width: 1em;
+    height: 1em;
+}
+
+table {
+    word-break: initial;
+}
+
+[contenteditable] {
+    outline: 0;
+}
+
+.success {
+    color: var(--success);
+}
+
+.warning {
+    color: var(--warning);
+}
+
+.danger {
+    color: var(--danger);
+}
+
+/* =================================== /RESET =================================== */
+
+/* =================================== GRID =================================== */
+
+/*main {
+	width: 90%;
+	margin: auto;
+	padding: 1em;
+}*/
+
+@media screen and (min-width: 1024px) {
+    .content-row {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+.column {
+    /*box-sizing: border-box;*/
+    display: flex;
+    /*flex-wrap: nowrap;*/
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    /*width: 100%;*/
+    /*margin: 1em;*/
+}
+
+.column > .item {
+    /*width: 100%;*/
+    /*min-width: 10%;*/
+    flex: 0 1 auto;
+    margin: 1em;
+}
+
+.row {
+    /*box-sizing: border-box;*/
+    display: flex;
+    /*flex-wrap: nowrap;*/
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    /*width: 100%;*/
+    /*padding: 1em;*/
+    /*margin: 1em 0;*/
+    /*overflow: auto;*/
+}
+
+.row.overflow {
+    overflow: auto;
+}
+
+.row.align {
+    align-items: center;
+}
+
+.row.center { /**/
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+
+.row > .item {
+    box-sizing: border-box;
+    padding: 1em;
+    /*margin: 1em;*/
+    width: 100%;
+    flex: 1 1 0; /* por padrão todos os itens da row possuem o mesmo tamanho */
+    /*overflow: auto;*/
+}
+
+/* AJEITAR: problema entre equal height e equal, quando juntos e quando separados. */
+.row.equal.height > .item {
+    display: flex;
+}
+
+.row > .item.equal.height {
+    display: flex;
+}
+
+.row > .item.overflow {
+    overflow: auto;
+}
+
+.row.clear > .item {
+    margin-left: 0;
+}
+
+.row.clear > .item:last-child {
+    margin-right: 0;
+}
+
+.row > .item.clear {
+    margin: 0;
+}
+
+/*
+.row.clean > .item .row .item {
+    margin-left: 0;
+}
+
+.row.clean > .item .row .item:last-child {
+    margin-right: 0;
+}
+
+.row.clean > .item .row > .item {
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+
+.row.clean > .item .row > .item .row .item {
+    margin-top: 0;
+}
+
+.row.clean > .item .row > .item:not(:only-child) {
+    margin-top: 0;
+}*/
+
+.row.clean > .item .row > .item {
+    margin: 1em 0 0;
+}
+
+.row.clean > .item .row > .item:not(:only-child) {
+    margin-top: 1em;
+    margin-right: 1em;
+}
+
+.row.clean > .item .row > .item:not(:only-child):last-child {
+    margin-right: 0;
+}
+
+.row.auto > .item {
+    flex: 1 1 auto; /* o tamanho dos itens é de acoro com espaço disponível */
+}
+
+.row.two > .item {
+    flex: 1 1 50%; /* define o tamanho máximo dos itens */
+}
+
+.row.tree > .item {
+    flex: 1 1 33.3333333333%; /* define o tamanho máximo dos itens */
+}
+
+/* Analisar: somente row four em telas grandes */
+.row.four > .item {
+    flex: 1 1 25%; /* define o tamanho máximo dos itens */
+}
+
+.row.center > .item { /* PROBLEMA, NÃO DIVIDE IGUALMENTE!!! */
+    flex: 0 1 auto;
+}
+
+.item.center {
+    display: flex;
+    justify-content: center;
+}
+
+.row.align > .item.center {
+    align-items: center;
+}
+
+.row > .item.between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item.center > * {
+    /*box-sizing: border-box;*/
+    /*padding: 1em;*/
+    flex: 0 1 auto;
+}
+
+@media screen and (max-width: 1024px) {
+
+    .row > .item,
+    .row.align > .item,
+    .row.center > .item,
+    .row.two > .item,
+    .row.tree > .item,
+    .row.four > .item {
+        flex: 1 1 auto;
+    }
+
+    .row.center {
+        flex-wrap: wrap;
+    }
+
+    .item.center,
+    .row.center {
+        justify-content: flex-start;
+    }
+
+}
+
+.row .fill,
+.column .fill {
+    flex-grow: 1;
+}
+
+.row .unfill,
+.column .unfill {
+    flex-grow: 0;
+}
+
+.align-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*
+CENTRALIZAR ALGO NA TELA!!!
+position: fixed;
+background: lightblue;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+display: flex;
+overflow: auto;
+color: #fff;
+justify-content: center;
+align-items: center;
+z-index: 1;
+
+*/
+
+.real-error-center {
+    position: fixed;
+    background: lightblue;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    overflow: auto;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+/* =================================== /GRID =================================== */
+
+/* =================================== TOOL =================================== */
+
+.hide {
+    display: none;
+}
+
+.responsive {
+    overflow: auto;
+}
+
+/* =================================== /TOOL =================================== */
+
+/* =================================== ANIMATION =================================== */
+
+/* FLASH */
+@-webkit-keyframes flash {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.effect-flash {
+    -webkit-animation: flash 1s infinite;
+    -o-animation: flash 1s infinite;
+    animation: flash 1s infinite;
+}
+
+/* ROTATE */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.effect-rotate {
+    -webkit-animation: rotate 2s infinite linear;
+    -o-animation: rotate 2s infinite linear;
+    animation: rotate 2s infinite linear;
+}
+
+/* RING */
+@keyframes ring {
+    0% {
+        transform: rotate(0);
+    }
+    15% {
+        transform: rotate(5deg);
+    }
+    30% {
+        transform: rotate(-5deg);
+    }
+    45% {
+        transform: rotate(4deg);
+    }
+    60% {
+        transform: rotate(-4deg);
+    }
+    75% {
+        transform: rotate(2deg);
+    }
+    85% {
+        transform: rotate(-2deg);
+    }
+    92% {
+        transform: rotate(1deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.effect-ring {
+    -webkit-animation: ring 2s infinite linear;
+    -o-animation: ring 2s infinite linear;
+    animation: ring 2s infinite linear;
+}
+
+/* FLASH LOADING */
+@-webkit-keyframes loading {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.effect-loading {
+    -webkit-animation: loading 400ms infinite;
+    -o-animation: loading 400ms infinite;
+    animation: loading 400ms infinite;
+}
+
+/* =================================== /ANIMATION =================================== */
+
+/* =================================== INPUT =================================== */
+
+form .check-set > label {
+    display: block;
+    margin-top: 0.75em;
+}
+
+/* =================================== /INPUT =================================== */
+
+/* =================================== MARGIN TOP =================================== */
+
+.margin-top-05 {
+    margin-top: 0.5em;
+}
+
+.margin-top-1 {
+    margin-top: 1em;
+}
+
+/* =================================== /MARGIN TOP =================================== */
+
+/* =================================== MARGIN BOTTOM =================================== */
+
+.padding-top-1 {
+    padding-top: 1em;
+}
+
+/* =================================== /MARGIN BOTTOM =================================== */
+
+/* =================================== LINK DEFAULT =================================== */
+
+a.link.default {
+    text-decoration: underline;
+}
+
+/* =================================== /LINK DEFAULT =================================== */
+
+/* =================================== ALERT =================================== */
+
+.alert {
+    position: fixed;
+    top: 2em;
+    right: 2em;
+    padding: 1em;
+    max-width: 30%;
+    background: var(--color-theme-main);
+    color: var(--white);
+    z-index: 3;
+    opacity: 0.9;
+    box-shadow: 0 0.2em 0.4em 0 rgba(0, 0, 0, 0.16), 0 0.2em 1em 0 rgba(0, 0, 0, 0.12);
+    /* box-shadow: 0 0.2em 0.4em 0 #fff, 0 0.2em 1em 0 #fff; */
+}
+
+.alert.information {
+    background-color: rgba(0, 150, 255, 1);
+}
+
+.alert.success {
+    background-color: rgba(0, 150, 0, 1);
+}
+
+.alert.warning {
+    background-color: rgba(255, 150, 0, 1);
+}
+
+.alert.danger {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+@media (max-width: 1024px) {
+    /**
+     * Largura máxima de alertas.
+    */
+    .alert {
+        max-width: 70%;
+    }
+}
+
+/*
+ * Estilo do botão de fechar alertas.
+*/
+.alert-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.15em;
+    line-height: 0.7;
+}
+
+
+/* =================================== /ALERT =================================== */
+
+/* =================================== ASPECT RATIO =================================== */
+
+.aspect-ratio {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.aspect-ratio:before {
+    content: "";
+    display: block;
+    /*padding-top: 75%;*/
+}
+
+.aspect-ratio.ratio-1-1:before {
+    padding-top: 100%;
+}
+
+.aspect-ratio.ratio-2-1:before {
+    padding-top: 50%;
+}
+
+.aspect-ratio.ratio-1-2:before {
+    padding-top: 200%;
+}
+
+.aspect-ratio.ratio-4-3:before {
+    padding-top: 75%;
+}
+
+.aspect-ratio.ratio-16-9:before {
+    padding-top: 56.25%;
+}
+
+.aspect-ratio > .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+/* =================================== /ASPECT RATIO =================================== */
+
+/* =================================== BLOCKQUOTE =================================== */
+
+blockquote {
+    position: relative;
+    padding: 0.75em;
+    border-left: 1em solid var(--firstTheme);
+    border-right: 0.15em solid var(--firstTheme);
+    box-shadow: 0.1em 0.1em 1em #ccc;
+}
+
+/*blockquote h2::before {
+    position: absolute;
+    left: -0.3em;
+    top: 0;
+    content: "\201C";
+    font-family: Georgia, serif;
+    font-size: 250%;
+    font-weight: bold;
+    color: var(--firstTheme);
+}*/
+
+blockquote a {
+    background: #eee;
+    color: var(--firstTheme);
+}
+
+blockquote h2 {
+    /*text-indent: 1.5em;*/
+    font-size: 150%;
+    color: var(--firstTheme);
+}
+
+/* =================================== /BLOCKQUOTE =================================== */
+
+/* =================================== BORDERED BOX =================================== */
+
+.borderedbox {
+    border: 0.1em solid var(--firstTheme06);
+    padding: 1em;
+}
+
+.borderedbox.ellipse {
+    border-radius: 1em;
+}
+
+.borderedbox-title {
+    color: var(--firstTheme);
+    font-size: 150%;
+    font-weight: normal;
+}
+
+.borderedbox-subtitle {
+    font-style: italic;
+}
+
+/* =================================== /BORDERED BOX =================================== */
+
+/* =================================== BUTTON =================================== */
+
+.button {
+    /*padding: 1em;*/
+    padding: 0.5em 1em;
+    box-sizing: border-box;
+    box-shadow: 0 0.15em 0.2em 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    text-align: center;
+}
+
+/**
+ * Estilo para botões ao passar o mouse.
+*/
+.button:hover {
+    box-shadow: 0 0.2em 0.8em 0 rgba(0, 0, 0, 0.4);
+}
+
+/**
+ * Estilo para botões desabilitados.
+*/
+.button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/**
+ * Estilo de botão padrão.
+*/
+.button-default {
+    color: rgba(102, 102, 102, 1);
+    border: 0.1em solid rgba(187, 187, 187, 1);
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/**
+ * Estilo de botão primário.
+*/
+.button-primary {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(43, 133, 231, 1);
+}
+
+/**
+ * Estilo de botão de sucesso.
+*/
+.button-success {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(76, 175, 80, 1);
+}
+
+/**
+ * Estilo de botão de alerta.
+*/
+.button-warning {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(250, 160, 10, 0.9);
+}
+
+/**
+ * Estilo do botão de perigo.
+*/
+.button-danger {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 40, 30, 0.9);
+}
+
+.button-theme {
+    color: #fff;
+    background-color: var(--firstTheme);
+}
+
+.button-reverse {
+    border: 0.1em solid #fff;
+    padding: 0.4em 0.9em;
+}
+
+.button-inverse {
+    color: var(--firstTheme);
+    border: 0.1em solid var(--firstTheme);
+    padding: 0.4em 0.9em;
+}
+
+.button.small {
+    font-size: 110%;
+}
+
+.button.medium {
+    font-size: 125%;
+}
+
+.button.large {
+    font-size: 150%;
+}
+
+.button-full {
+    color: #fff;
+    background: var(--color-theme-main);
+    opacity: 0.75;
+}
+
+.button-light {
+    border: 0.1em solid var(--color-theme-alternate);
+    padding: 0.4em 0.9em;
+}
+
+.button.radius {
+    border-radius: 2em;
+}
+
+.button.full {
+    width: 100%;
+}
+
+.button-success-alt {
+    background: #10cb7f;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.button-warning-alt {
+    background: #ff6d0d;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* =================================== /BUTTON =================================== */
+
+/* =================================== DROPDOWN =================================== */
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+    min-width: 20em;
+    right: 0;
+    color: var(--firstTheme);
+    background-color: #fff;
+    box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.dropdown-content.left {
+    left: 0;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 1em;
+}
+
+.dropdown-content a:hover {
+    color: #fff;
+    background-color: var(--firstTheme06) !important;
+}
+
+/* =================================== /DROPDOWN =================================== */
+
+/* =================================== FEATURED =================================== */
+
+.featured {
+    position: relative;
+    z-index: 1;
+}
+
+.featured-title {
+    position: absolute;
+    top: 3em;
+    left: 5em;
+    font-size: 200%;
+    font-weight: normal;
+    padding: 0.5em;
+    margin: 0;
+    color: #fff;
+    background-color: var(--firstTheme06);
+}
+
+.featured-description {
+    position: absolute;
+    top: 10.8em;
+    left: 10em;
+    background: rgba(59, 59, 59, 0.8);
+    color: #ddd;
+    width: 50%;
+    padding: 1em;
+}
+
+.featured-descriptiona {
+    position: absolute;
+    top: 15%;
+    right: 10%;
+    /*padding: 0;*/
+    width: 20%;
+    height: 20%;
+    /*height: 20%;*/
+}
+
+@media (max-width: 1024px) {
+
+    .featured-description {
+        display: none;
+    }
+
+    .featured-title {
+        font-size: 100%;
+        top: 3em;
+        left: 2em;
+    }
+
+}
+
+.featured-link {
+    font-style: italic;
+}
+
+.featured-image {
+    /*height: 30vw;*/
+}
+
+/* =================================== /FEATURED =================================== */
+
+/* =================================== HEADLINE DEFAULT =================================== */
+
+.headline.default {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: var(--firstTheme);
+    font-size: 150%;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.headline.default.headline-content {
+    padding: 2em;
+}
+
+.headline.default > .headline-title {
+    font-size: inherit;
+    font-weight: normal;
+    text-align: center;
+    margin: 0;
+}
+
+.headline.default > .equivalent {
+    width: 50%;
+}
+
+/* =================================== /HEADLINE DEFAULT =================================== */
+
+/* =================================== HEADLINE CALL =================================== */
+
+.headline.call {
+    background: var(--color-theme-main);
+    opacity: 0.7;
+}
+
+.headline.call > .content-row > .title {
+    font-size: 115%;
+    padding: 1em;
+    color: #fff;
+}
+
+/* =================================== /HEADLINE CALL =================================== */
+
+/* =================================== INPUT =================================== */
+
+/* TODO: modificado */
+fieldset {
+    /*border: 0.1em solid;*/
+    /*box-shadow: 0 0.1em 0.1em 0;*/
+    /*border: 0.1em solid var(--themeColor03);*/
+    /*border: none;*/
+    border: 0.1em solid hsl(0, 0%, 80%);
+    /*padding: 1em;*/
+    background-color: var(--white);
+}
+
+/**
+ * Estilo dos campos do formulário.
+*/
+select,
+textarea,
+input:not([type='radio']):not([type="checkbox"]):not(.newa) {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.75em;
+    border: 0.1em solid #ccc;
+    /*border-radius: 1.5em;*/
+}
+
+input, label, textarea, select {
+    margin: 0;
+}
+
+/* =================================== /INPUT =================================== */
+
+/* =================================== LIST =================================== */
+
+ol {
+    list-style-type: none;
+    counter-reset: item;
+    margin: 1em;
+    padding: 0;
+}
+
+ol li {
+    display: table;
+    counter-increment: item;
+}
+
+ol li:before {
+    content: counters(item, ".") ". ";
+    display: table-cell;
+    padding-right: 1em;
+}
+
+ol li li:before {
+    content: counters(item, ".") ". ";
+}
+
+/* =================================== /LIST =================================== */
+
+/* =================================== NAVBAR =================================== */
+
+.navbar {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    /*color: var(--firstTheme);*/
+}
+
+/*
+ * Apply a color and font size to anchor in navbar brand.
+ */
+.navbar a {
+    font-size: 120%;
+    padding: 1em;
+}
+
+/*
+ * Style of anchor in navbar menu.
+ */
+.navbar-menu a {
+    display: inline-block;
+    padding: 1.5em;
+}
+
+/*
+ * Style of anchor in navbar menu on hover.
+ */
+.navbar-menu a:hover {
+    color: var(--themeBackground);
+    background-color: var(--firstTheme);
+}
+
+/*
+ * Style of elements with active class in navbar menu.
+ */
+.navbar-menu .active {
+    color: var(--themeBackground);
+    background-color: var(--firstTheme);
+}
+
+/* =================================== /NAVBAR =================================== */
+
+/* =================================== STRUCTURE =================================== */
+
+.container {
+    /*float: left;*/
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+/**
+ * Conteúdo.
+*/
+/*.content {
+    width: 90%;
+    margin: auto;
+}*/
+
+/**
+ * Estilo do modal.
+*/
+.modal {
+    box-sizing: border-box;
+    position: fixed;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 1%; /* Ajeitar */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /*background-color: hsla(0, 0%, 0%, 0.5);*/
+    background-color: #fff;
+}
+
+/**
+ * Estilo do botão de voltar ao topo.
+*/
+.back-top {
+    position: fixed;
+    top: 90%;
+    right: 0.6%;
+    width: 4vw;
+    height: 4vw;
+}
+
+/*!**
+ * Estilo de navegações.
+*!
+.navigation a {
+    box-sizing: border-box;
+    padding: 0.5%;
+    float: left;
+    text-align: center;
+}
+
+!**
+ * Estilo para esconder a navegação.
+*!
+.navigation .navigation-button {
+    display: none;
+}
+
+
+@media (min-width: 1024px) {
+    !**
+     * Estilo para mostrar o menu de navegação.
+    *!
+    .navigation .navigation-menu {
+        display: block;
+    }
+}
+
+.navigation-menu-ead a {
+    width: 14.2857142857%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    font-size: 100%;
+}
+
+!**
+ * Estilo para o menu da navegação pequeno.
+*!
+.navigation-menu-small a {
+    width: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-size: 100%;
+}
+
+!**
+ * Estilo para o menu da navegação médio.
+*!
+.navigation-menu-medium a {
+    width: 12.5%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    font-size: 145%;
+}
+
+@media (max-width: 1024px) {
+    !**
+     * Estilo de navegações.
+    *!
+    .navigation a {
+        width: 100%;
+        text-align: left;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+
+    !**
+     * Estilo para mostrar a navegação.
+    *!
+    .navigation .navigation-button {
+        display: block;
+    }
+}
+
+@media (min-width: 1024px) {
+    !**
+     * Estilo da navegação social.
+    *!
+    .navigation-social {
+        position: fixed;
+        font-size: 250%;
+        width: 5%;
+        top: 40%;
+        right: 0.35%;
+    }
+
+    !**
+     * Estilo dos botões da navegação social.
+    *!
+    .navigation-social a {
+        display: block;
+        padding-top: 20%;
+        padding-bottom: 20%;
+    }
+}
+
+@media (max-width: 1024px) {
+    !**
+     * Estilo da navegação social.
+    *!
+    .navigation-social {
+        position: fixed;
+        width: 100%;
+        bottom: 0%;
+    }
+
+    !**
+     * Estilo dos botões da navegação social.
+    *!
+    .navigation-social a {
+        float: left;
+        width: 33.3333333333%;
+    }
+}
+
+!*
+ * Estilo da navegação social fixa
+*!
+.social-navigation-fixed {
+    z-index: 2;
+    color: #fff;
+    !* ANALISAR SE TU PODES POR FLEXBOX!!! PARA CENTRALIZAR EM COLUNA *!
+    position: fixed;
+    !*top: 25%;*!
+    width: 4.5vw;
+    !*left: auto;*!
+    !*float: right;*!
+    right: 0;
+}
+
+!* PORQUE SEM ISSO NÃO FUNCIONA? PORQUE OS LINKS TEM QUE SER INLINE??? *!
+.social-navigation-fixed a {
+    display: block;
+}
+
+!*
+ * Estilo para a navegação social fixa funcionar corretamente.
+*!
+.social-navigation-fixed span,
+.social-navigation-fixed svg {
+    display: block;
+}
+
+!*
+ * preenchimento ao redor dos botões da navegação social fixa.
+*!
+.social-navigation-fixed span {
+    padding: 20%;
+}*/
+
+.nav-test {
+    position: fixed;
+    /*background: lightblue;*/
+    /*top: 0;*/
+    bottom: 0;
+    /*left: 0;*/
+    right: 0;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    display: flex;
+    /*overflow: auto;*/
+    /*background-color: tomato;*/
+    color: #fff;
+    /*width: 5vw;*/
+    /*display: block;*/
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.nav-test span {
+    padding: 1em;
+    border-radius: 50%;
+}
+
+.nav-test a,
+.nav-test span,
+.nav-test svg {
+    display: block;
+    pointer-events: initial;
+}
+
+.nav-test svg {
+    display: block;
+    font-size: 250%;
+    /*width: 2.5em;*/
+    /*height: 2.5em;*/
+}
+
+/**
+ * Adiciona seta do breadcrumb.
+*/
+.breadcrumb a:not(:last-child)::after {
+    content: " >";
+}
+
+/**
+ * Muda a cor da útima seta do breadcrumb.
+*/
+.breadcrumb a:last-child {
+    color: rgba(198, 40, 40, 1);
+    font-weight: bold;
+}
+
+/* =================================== /STRUCUTRE =================================== */
+
+/* =================================== STYLE =================================== */
+
+caption {
+    font-size: 200%;
+}
+
+h1 {
+    color: var(--color-theme-alternate);
+    font-size: 250%;
+}
+
+h1.default {
+    color: #555;
+}
+
+h2 {
+    font-size: 225%;
+}
+
+h3 {
+    font-size: 200%;
+}
+
+h4 {
+    font-size: 175%;
+}
+
+h5 {
+    font-size: 150%;
+}
+
+h6 {
+    font-size: 125%;
+}
+
+p {
+    font-size: 100%;
+}
+
+.tagline {
+    font-size: 150%;
+}
+
+.font-size-50 {
+    font-size: 50%;
+}
+
+.font-size-100 {
+    font-size: 100%;
+}
+
+.font-size-150 {
+    font-size: 150%;
+}
+
+.font-size-200 {
+    font-size: 200%;
+}
+
+.font-size-250 {
+    font-size: 250%;
+}
+
+.font-size-300 {
+    font-size: 300%;
+}
+
+.font-size-350 {
+    font-size: 350%;
+}
+
+.font-size-400 {
+    font-size: 400%;
+}
+
+.font-size-450 {
+    font-size: 450%;
+}
+
+.font-size-500 {
+    font-size: 500%;
+}
+
+.font-size-550 {
+    font-size: 550%;
+}
+
+.font-size-600 {
+    font-size: 600%;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+/* =================================== /STYLE =================================== */
+
+/* =================================== TIMELINE =================================== */
+
+.timeline {
+    padding-left: 1em;
+}
+
+.timeline > .item {
+    display: flex;
+    position: relative;
+}
+
+.timeline > .item > .content {
+    padding: 1em;
+}
+
+.timeline > .item > .content:before {
+    content: '';
+    position: absolute;
+    top: 1em;
+    left: -0.7em;
+    width: 1em;
+    height: 1em;
+    border: 0.4em solid var(--firstTheme);
+    border-radius: 50%;
+    background: #fff;
+}
+
+.timeline > .item > .content {
+    flex: 1;
+    border-left: 0.4em solid var(--firstTheme);
+}
+
+.timeline > .item > .content p {
+    margin: 0.2em 0 0;
+    color: var(--firstTheme);
+}
+
+.timeline > .item > .content span {
+    display: block;
+    margin: 0.4em 0 0;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* =================================== /TIMELINE =================================== */
+
+/* =================================== ICON =================================== */
+
+.icon {
+    font-size: inherit;
+}
+
+.icon::before {
+    line-height: 1em;
+}
+
+.icon-done::before {
+    content: '✔';
+}
+
+/**
+ * Ícone empty.
+*/
+.icon-empty::before {
+    content: "☐";
+}
+
+/**
+ * Ícone check.
+*/
+.icon-check::before {
+    content: "☑";
+}
+
+/**
+ * Ícone uncheck.
+*/
+.icon-uncheck::before {
+    content: "☒";
+}
+
+/**
+ * Ícone email.
+*/
+.icon-email::before {
+    content: "✉";
+}
+
+/**
+ * Ícone edit.
+*/
+.icon-edit::before {
+    content: "✎";
+}
+
+/**
+ * Ícone delete.
+*/
+.icon-delete::before {
+    content: "✗";
+}
+
+/**
+ * Ícone copyright.
+*/
+.icon-copyright::before {
+    content: "©";
+}
+
+/**
+ * Ícone popular.
+*/
+.icon-popular::before {
+    content: "★";
+}
+
+/**
+ * Ícone star.
+*/
+.icon-star::before {
+    content: "☆";
+}
+
+/**
+ * Ícone male.
+*/
+.icon-male::before {
+    content: "♂";
+}
+
+/**
+ * Ícone female.
+*/
+.icon-female::before {
+    content: "♀";
+}
+
+.icon-rightward::before {
+    content: "⥂";
+}
+
+.icon-plus::before {
+    content: "+";
+}
+
+/* =================================== /ICON =================================== */
+
+/* =================================== AJAX =================================== */
+
+.ajax {
+
+}
+
+.ajax > .background,
+.ajax > .background > .loading,
+.ajax > .background > .loading > .spinner,
+.ajax > .background > .loading > .spinner:after,
+.ajax > .background > .loading > .spinner:before {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ajax > .background {
+    top: 0;
+    overflow: hidden; /* por no body */
+    width: 100%;
+    height: 100%;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    z-index: 4;
+}
+
+.ajax > .background > .loading {
+    font-size: 125%;
+}
+
+.ajax > .background > .loading > span {
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 0 rgba(255, 255, 255, 0.75), 0 0 0.2em var(--firstTheme), 0 0 0.4em var(--firstTheme), 0 0 0.6em var(--firstTheme), 0 0 0.8em var(--firstTheme), 0 0 1em var(--firstTheme);
+}
+
+.ajax > .background > .loading > .spinner,
+.ajax > .background > .loading > .spinner:after,
+.ajax > .background > .loading > .spinner:before {
+    border-radius: 50%;
+    box-shadow: 0.3em 0 0.1em -0.1em #fff, 0.5em 0 0.5em var(--firstTheme), inset -1em 0 1em -0.5em var(--firstTheme);
+}
+
+.ajax > .background > .loading > .spinner {
+    padding: 4em;
+    animation: rotation 1s linear infinite;
+}
+
+.ajax > .background > .loading > .spinner:after,
+.ajax > .background > .loading > .spinner:before {
+    content: "";
+}
+
+.ajax > .background > .loading > .spinner:after {
+    padding: 6em;
+}
+
+.ajax > .background > .loading > .spinner:before {
+    padding: 8em;
+}
+
+/* =================================== /AJAX =================================== */
+
+/* =================================== INPUT AJEITAR =================================== */
+
+.option-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    background-color: #ccc;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.75em;
+}
+
+.option-input:hover {
+    background-color: var(--firstTheme06);
+}
+
+.option-input:checked {
+    background-color: var(--firstTheme);
+    animation: rotation 1s;
+}
+
+.option-input.radio {
+    border-radius: 50%;
+}
+
+.option-input.radio::after {
+    border-radius: 50%;
+}
+
+/* =================================== /INPUT AJEITAR =================================== */
+
+/* =================================== APP NAVBAR =================================== */
+
+@media screen and (min-width: 1025px) {
+
+    .nav-default {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        background-color: var(--firstTheme);
+        border-bottom: 0.1em solid #fff;
+        text-align: center;
+    }
+
+    .nav-default > a {
+        flex-grow: 1;
+        padding: 1em;
+    }
+
+    .nav-default > a:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .nav-default > a:not(:last-child) {
+        border-right: 0.1em solid #fff;
+    }
+
+}
+
+.sider {
+    color: #fff;
+    background-color: var(--firstTheme);
+    z-index: 2;
+}
+
+.sider a {
+    display: block;
+    padding: 1em;
+    border-top: 0.1em solid #fff;
+}
+
+.sider a:last-child {
+    border-bottom: 0.1em solid #fff;
+}
+
+.sider a:hover {
+    opacity: 0.6;
+    background-color: var(--lastTheme);
+}
+
+.sider .active {
+    opacity: 0.8;
+    background-color: var(--lastTheme);
+}
+
+
+/*.app-bar {
+	display: none;
+}*/
+
+@media screen and (max-width: 1024px) {
+
+    .app-bar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #ffffff;
+        background-color: var(--firstTheme);
+    }
+
+    .app-bar .nav-icon a {
+        display: inline-flex;
+        padding: 1em;
+    }
+
+    .app-bar .title {
+        font-size: 225%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-left: 0.25em;
+    }
+
+    .app-bar .empty-fill {
+        flex-grow: 1;
+    }
+
+    .app-bar .action-icons {
+        display: flex;
+    }
+
+    .app-bar .action-icons .icon-search a {
+        display: inline-flex;
+        padding: 1em;
+    }
+
+    .app-bar .action-icons .love a {
+        display: inline-flex;
+        padding: 1em;
+    }
+
+    .app-bar .menu-icons .dropdown span a:first-child {
+        display: inline-flex;
+        padding: 1em;
+    }
+
+    .app-bar svg {
+        width: 2.4em;
+        height: 2.4em;
+    }
+
+}
+
+/* =================================== /APP NAVBAR =================================== */
+
+/* =================================== MENU BAR =================================== */
+
+.menu-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 125%;
+    color: #ffffff;
+    background-color: var(--firstTheme);
+}
+
+.menu-bar a {
+    display: inline-flex;
+    padding: 1em;
+}
+
+.menu-bar a:hover {
+    background-color: var(--lastTheme);
+}
+
+.menu-bar .menu-title {
+    font-weight: bold;
+}
+
+.menu-bar .empty-fill {
+    flex-grow: 1;
+}
+
+.menu-bar .menu-action {
+    font-weight: bold;
+}
+
+/* =================================== /MENU BAR =================================== */
+
+/* =================================== FORM MULTI LIST =================================== */
+
+.form-multi-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-multi-list > div {
+    padding: 0.25em 0.75em;
+    border: 0.1em solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-multi-list > div:not(:last-child) {
+    margin-bottom: 0.75em;
+}
+
+.form-multi-list > div > span:last-child {
+    padding-left: 0.75em;
+    padding-right: 0.25em;
+}
+
+/* =================================== /FORM MULTI LIST =================================== */
+
+/* =================================== TABLE =================================== */
+
+.table-responsive {
+    overflow: auto;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+tbody {
+    overflow: auto;
+    overflow-y: scroll;
+}
+
+thead {
+    color: var(--white);
+    background-color: var(--themeColor06);
+    text-transform: uppercase;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+tr:nth-child(even) {
+    background-color: var(--themeColor01);
+}
+
+td, th {
+    border: 0.01em solid var(--themeColor02);
+    text-align: left;
+    padding: 1em;
+    white-space: nowrap;
+}
+
+/* Collapse Rows Style */
+/*@media screen and (max-aspect-ratio: 13/9) {*/
+
+    @media screen and (max-width: 1024px) {
+        /* Provavelmente não precisa dissso por causa dos vw e vh */
+        tr {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        td, th {
+            flex: 1 1 100%;
+        }
+    }
+
+/*}*/
+
+/* =================================== /TABLE =================================== */
+
+/* =================================== FOOTER =================================== */
+
+footer {
+    color: #fff;
+    background-color: #3f4270;
+}
+
+/* =================================== /FOOTER =================================== */
+
+/* =================================== NAVIGATION SAMPLE LIST =================================== */
+
+.navigation.sample.list > p:not(:first-child) {
+    margin-top: 0.5em;
+}
+
+/* =================================== /NAVIGATION SAMPLE LIST =================================== */
+
+/* =================================== NAVIGATION SAMPLE LINK =================================== */
+
+.navigation.sample.link > a:not(:first-child) {
+    display: block;
+    margin-top: 0.75em;
+}
+
+.navigation.sample.link > a > i {
+    color: hsla(240, 50%, 50%, 1);
+    margin-right: 0.5em;
+}
+
+/* =================================== NAVIGATION SAMPLE LINK =================================== */
+
+/* =================================== NAVIGATION FULL CONTENT =================================== */
+
+/* TODO: fazer melhorias de usabildade para os botões não exigirem cliques muito precisos. */
+.navigation.full.content {
+    background: var(--color-theme-main); /* #2146C7 */
+    opacity: 0.7;
+}
+
+.navigation.full.content > .content-row > .content {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    font-size: 115%;
+    color: #fff;
+}
+
+.navigation.full.content > .content-row > .content > .brand {
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.navigation.full.content > .content-row > .content > .brand > .toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.navigation.full.content > .content-row > .content > .link > a:not(:last-child) {
+    margin-right: 1em;
+}
+
+.navigation.full.content > .content-row > .content > .link.hide {
+    display: block;
+}
+
+@media screen and (max-width: 1024px) {
+    .navigation.full.content > .content-row > .content > .link > a {
+        display: block;
+        padding: 1em;
+        border-top: 0.1em solid;
+    }
+
+    .navigation.full.content > .content-row > .content > .link > a:not(:last-child) {
+        margin-right: 0;
+    }
+
+    .navigation.full.content > .content-row > .content {
+        padding: 0;
+        display: block;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .navigation.full.content > .content-row > .content > .brand,
+    .navigation.full.content > .content-row > .content > .brand > a {
+        font-size: 125%;
+    }
+
+    .navigation.full.content > .content-row > .content > .brand {
+        padding: 0.75em;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navigation.full.content > .content-row > .content > .brand > .toggle {
+        display: block;
+    }
+
+    .navigation.full.content > .content-row > .content > .link.hide {
+        display: none;
+    }
+}
+
+/* =================================== /NAVIGATION FULL CONTENT =================================== */
+
+/* =================================== NAVIGATION PANEL CONTENT =================================== */
+
+.navigation.panel.content {
+    /*position: fixed;*/
+    /*width: 100%;*/
+    /*height: 10%;*/
+    background: #8c7ae6;
+    /*background: linear-gradient(30deg, #fd6d68 0%, #f8a04e 80%);*/
+    /*opacity: 0.7;*/
+}
+
+.navigation.panel.content > .content {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    font-size: 115%;
+    color: #fff;
+}
+
+.navigation.panel.content > .content > .brand {
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.navigation.panel.content > .content > .brand > .toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.navigation.panel.content > .content > .link > a:not(:last-child) {
+    margin-right: 1em;
+}
+
+.navigation.panel.content > .content > .link.hide {
+    display: block;
+}
+
+/*@media screen and (max-width: 1024px) {*/
+.navigation.panel.content > .content > .link > a {
+    display: block;
+    padding: 1em;
+    border-top: 0.1em solid;
+}
+
+.navigation.panel.content > .content > .link > a:not(:last-child) {
+    margin-right: 0;
+}
+
+.navigation.panel.content > .content {
+    padding: 0;
+    display: block;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.navigation.panel.content > .content > .brand,
+.navigation.panel.content > .content > .brand > a {
+    font-size: 125%;
+}
+
+.navigation.panel.content > .content > .brand {
+    padding: 0.75em;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navigation.panel.content > .content > .brand > .toggle {
+    display: block;
+}
+
+.navigation.panel.content > .content > .link.hide {
+    display: none;
+}
+
+/*}*/
+
+/*.navigation.panel.content {
+    background-color: #772036;
+}
+
+.navigation.panel.content > .sidebar {
+    position: fixed;
+    width: 20%;
+    height: 90%;
+    top: 10%;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(30deg, #fd6d68 0%, #f8a04e 80%);
+}
+
+.navigation.panel.content > .sidebar > a {
+    display: flex;
+    padding: 1em;
+    color: #CCCCCC;
+    font-size: 125%;
+}
+
+.navigation.panel.content > .sidebar > p {
+    display: flex;
+    padding: 1em 1em 0.5em 1em;
+    color: #fff;
+    font-size: 125%;
+    opacity: 0.75;
+}
+
+.navigation.panel.content > .content {
+    position: fixed;
+    width: 100%;
+    height: 10%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(30deg, #fd6d68 0%, #f8a04e 80%);
+}
+
+.navigation.panel.content > .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 115%;
+    color: #fff;
+    box-shadow: 0 0 13px rgba(0,0,0,.22);
+}
+
+.navigation.panel.content > .content > div {
+    padding: 1em;
+}
+
+@media screen and (max-width: 1024px) {
+
+}*/
+
+/* =================================== /NAVIGATION PANEL CONTENT =================================== */
+
+/* =================================== NAVIGATION SAMPLE SOCIAL =================================== */
+
+.navigation.sample.social {
+    display: flex;
+    justify-content: space-between;
+}
+
+.navigation.sample.social > a {
+    width: 3em;
+}
+
+.navigation.sample.social > a:not(:last-child) {
+    margin-right: 0.75em;
+}
+
+/* =================================== /NAVIGATION SAMPLE SOCIAL =================================== */
+
+/* =================================== LIST MANAGER DEFAULT =================================== */
+
+.list.manager.default > form.search {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.list.manager.default > form.search > input {
+    padding: 0.4em;
+    border: 0.1em solid #ccc;
+    flex-grow: 1;
+}
+
+.list.manager.default > form.search > button {
+    background-color: #8c7ae6;
+    color: #fff;
+    padding: 0.5em 1em;
+}
+
+.list.manager.default > .content > .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75em;
+    border-bottom: 0.1em solid rgba(0, 0, 0, .12);
+    color: #fff;
+    background: #8c7ae6;
+}
+
+.list.manager.default > .content > .header > .title {
+    font-size: 150%;
+}
+
+.list.manager.default > .content > .header > .addnew {
+    padding: 0.25em 0.25em 0.25em 0.75em;
+}
+
+.list.manager.default > .content > .body > p {
+    padding: 1em;
+    border-bottom: 0.1em solid rgba(0, 0, 0, .12);
+}
+
+.list.manager.default > .content > .body > .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.1em solid rgba(0, 0, 0, .12);
+}
+
+.list.manager.default > .content > .body > .item > a {
+    padding: 1em;
+}
+
+.list.manager.default > .content > .body > .item > a:first-child {
+    flex-grow: 1;
+}
+
+.list.manager.default > .content > .body > .item > a:last-child i {
+    font-size: 120%;
+}
+
+.list.manager.default > .content > .footer {
+    margin-top: 1em;
+    text-align: center;
+}
+
+/* =================================== /LIST MANAGER DEFAULT =================================== */
+
+/* =================================== PRESENTATION DEFAULT =================================== */
+
+/*.presentation.default > h1 {
+    color: var(--color-theme-alternate);
+}*/
+
+.presentation.default > p {
+    text-align: justify;
+    margin-top: 1em;
+    font-size: 115%;
+    font-weight: 300;
+}
+
+.presentation.default > .information {
+    margin-top: 1.5em;
+    display: flex;
+}
+
+.presentation.default > .information > div {
+    flex-basis: calc(50% - 0.5em);
+}
+
+.presentation.default > .information > div:first-child {
+    margin-right: 1em;
+}
+
+@media (max-width: 1024px) {
+    .presentation.default > .information {
+        flex-direction: column;
+    }
+
+    .presentation.default > .information > div:first-child {
+        margin-bottom: 1em;
+        margin-right: 0;
+    }
+}
+
+/* =================================== /PRESENTATION DEFAULT =================================== */
+
+/* =================================== PRESENTATION PROJECT =================================== */
+
+/* ANALISAR: OBSOLETO? */
+
+.presentation.project {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    padding: 0.75em;
+}
+
+.presentation.project > .project {
+    background: white;
+}
+
+.presentation.project > .project:not(:first-child) {
+    margin-top: 1em;
+}
+
+.presentation.project > .project {
+    border-left: 0.25em solid #fd6d68;
+}
+
+.presentation.project > .project {
+    padding: 1em;
+}
+
+.presentation.project > .project > .item > h2 {
+    color: #fd6d68;
+    border-bottom: 0.1em solid #fd6d68;
+}
+
+.presentation.project > .project > .item > p {
+    font-size: 110%;
+    text-align: justify;
+    padding: 1em 0;
+}
+
+/* =================================== /PRESENTATION PROJECT =================================== */
+
+/* =================================== NOTICE DEFAULT =================================== */
+
+.notice-default {
+
+}
+
+.notice-default > .item:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+.notice-default > .item > .header {
+    padding: 0.25em;
+    color: #fff;
+    background: #9482ec;
+    border: 0.1em solid #9482ec;
+}
+
+.notice-default > .item > .header > h2 {
+    font-size: 150%;
+}
+
+.notice-default > .item > .body {
+    padding: 1em;
+    border: 0.1em solid #ccc;
+}
+
+.notice-default > .item > .body > p:not(:first-child) {
+    margin-top: 1em;
+}
+
+/* =================================== /NOTICE DEFAULT =================================== */
+
+/* =================================== CARD INFORMATION =================================== */
+
+.card.information {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 1em;
+    box-shadow: 0 0.1em 0.25em var(--color-theme-shadow);
+    padding: 1em;
+}
+
+.card.information span {
+    padding: 0.25em 0.5em;
+    margin-right: 0.5em;
+    border-radius: 0.25em;
+    float: left;
+    font-size: 2em;
+    color: #fff;
+}
+
+/* =================================== /CARD INFORMATION =================================== */
+
+/* =================================== CARD PRESENTATION =================================== */
+
+.card.presentation > .content {
+    background-color: #fff;
+    box-shadow: 0 0.1em 0.25em 0 #ccd0d9;
+    border-radius: 1em;
+    padding: 2em;
+    cursor: pointer;
+}
+
+.card.presentation > .content img {
+    width: 7em;
+}
+
+.card.presentation > .content > .description h2 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: 125%;
+    color: #292f3a;
+}
+
+.card.presentation > .content > .description h2:after {
+    content: "";
+    display: block;
+    position: relative;
+    top: 0.25em;
+    width: 100%;
+    height: 0.05em;
+    background-color: #d8dde6;
+}
+
+/* =================================== /CARD PRESENTATION =================================== */
+
+/* =================================== COLOR =================================== */
+
+.color.theme {
+    color: var(--firstTheme);
+}
+
+.color.white {
+    color: var(--white);
+}
+
+.color-green-light-500 {
+    color: var(--greenLight500);
+}
+
+.background-color-white {
+    background-color: var(--white);
+}
+
+.background-color-green-light-500 {
+    background-color: var(--greenLight500);
+}
+
+.background-color-red-light-500 {
+    background-color: var(--redLight500);
+}
+
+.background-color-blue-light-500 {
+    background-color: var(--blueLight500);
+}
+
+/* =================================== /COLOR =================================== */
+
+/* =================================== BACKGROUND THEME =================================== */
+
+.background.theme {
+    color: #fff;
+    background: hsl(227, 42%, 40%);
+}
+
+/* =================================== /BACKGROUND THEME =================================== */
+
+/* =================================== BACKGROUND GRADIENT DEFAULT =================================== */
+
+.background.gradient.default {
+    background: var(--color-theme-main);
+    opacity: 0.7;
+}
+
+.background.gradient.test {
+    background: var(--color-theme-alternate);
+    opacity: 0.7;
+}
+
+/* =================================== /BACKGROUND GRADIENT DEFAULT =================================== */
+
+/* =================================== BACKGROUND GRADIENT GOLD =================================== */
+
+.background.gradient.gold {
+    background: linear-gradient(290deg, #fdcd3b 60%, #ffed4b 60%);
+}
+
+/* =================================== /BACKGROUND GRADIENT GOLD =================================== */
+
+/* =================================== BACKGROUND SAMPLE =================================== */
+
+.background.sample {
+    background: #fbfbfb;
+}
+
+/* =================================== /BACKGROUND SAMPLE =================================== */
+
+/* =================================== COMMENT DEFAULT =================================== */
+
+.comment.default span {
+    margin-bottom: 1em;
+    display: inline-block;
+    position: relative;
+    padding-bottom: 1em;
+}
+
+.comment.default span::before {
+    height: 0.1em;
+    background: #24dc92;
+    width: 30%;
+    content: "";
+    position: absolute;
+    bottom: 0;
+}
+
+.comment.default {
+    background: #fff;
+    border-bottom: 0.1em solid #dddddd;
+    padding: 1em;
+    position: relative;
+}
+
+/*.comment.default::before {
+    color: #24dc92;
+    content: "ï„";
+    font-size: 10em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    left: 0;
+    right: 0;
+    opacity: 0.1;
+}*/
+
+.comment.default > .client-reviews i {
+    color: #f2b827;
+}
+
+/* =================================== /COMMENT DEFAULT =================================== */
+
+/* =================================== COMMENT INFORMATION =================================== */
+
+.comment.information span {
+    color: #24dc92;
+    display: inline-block;
+    margin-bottom: 1em;
+}
+
+.comment.information > h1 {
+    color: #292929;
+    font-size: 250%;
+    font-weight: 400;
+    text-transform: capitalize;
+    margin-bottom: 0.75em;
+    line-height: 1.25;
+}
+
+/* =================================== /COMMENT INFORMATION =================================== */
+
+/* =================================== TEXT BOX HELP =================================== */
+
+.text.box.help {
+
+}
+
+.text.box.help > .help.item {
+    display: flex;
+}
+
+.text.box.help > .help.item > .help.title {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.text.box.help > .help.item > .help.title {
+    display: flex;
+    position: relative;
+}
+
+.text.box.help > .help.item > .help.title > h1::before {
+    height: 0.1em;
+    background: linear-gradient(30deg, #fd6d68 0%, #f8a04e 80%);
+    opacity: 0.7;
+    width: 25%;
+    content: "";
+    position: absolute;
+    bottom: 0;
+}
+
+.text.box.help > .help.item > .help.image > img {
+    width: 10em;
+}
+
+.text.box.help > .help.item > .help.text {
+    padding-left: 3em;
+    margin-bottom: 2em;
+    text-align: justify;
+}
+
+.text.box.help > .help.item > .help.text > h2 {
+    color: #555555;
+    font-size: 150%;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 0.25em;
+}
+
+.text.box.help > .help.item > .help.text > p {
+    font-size: 125%;
+}
+
+@media (max-width: 1024px) {
+    .text.box.help {
+        /*background: #fff;*/
+    }
+
+    .text.box.help > .help.item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .text.box.help > .help.item > .help.title > h1::before {
+        display: none;
+    }
+
+    .text.box.help > .help.item > .help.text {
+        padding-left: 0;
+        margin-top: 1em;
+    }
+
+    .text.box.help > .help.item > .help.text > h2 {
+        text-align: center;
+        margin-bottom: 1em;
+    }
+}
+
+/* =================================== /TEXT BOX HELP =================================== */
+
+/* =================================== TAB SAMPLE CONTENT =================================== */
+
+.tab.sample.content > .item {
+    margin-bottom: 0.75em;
+}
+
+.tab.sample.content > .item > span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 125%;
+    color: #fff;
+    border-radius: 0.5em;
+    background-color: var(--color-theme-light);
+    padding: 0.55em 0.55em;
+    cursor: pointer;
+}
+
+.tab.sample.content p {
+    padding: 0.55em 0.55em;
+    border-bottom: 0.1em solid #e5e5e5;
+}
+
+/* =================================== /TAB SAMPLE CONTENT =================================== */
+
+/* =================================== ANIMATION =================================== */
+
+/* FLASH */
+@-webkit-keyframes flash {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.effect-flash {
+    -webkit-animation: flash 1s infinite;
+    -o-animation: flash 1s infinite;
+    animation: flash 1s infinite;
+}
+
+/* ROTATE */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.effect-rotate {
+    -webkit-animation: rotate 2s infinite linear;
+    -o-animation: rotate 2s infinite linear;
+    animation: rotate 2s infinite linear;
+}
+
+/* RING */
+@keyframes ring {
+    0% {
+        transform: rotate(0);
+    }
+    15% {
+        transform: rotate(5deg);
+    }
+    30% {
+        transform: rotate(-5deg);
+    }
+    45% {
+        transform: rotate(4deg);
+    }
+    60% {
+        transform: rotate(-4deg);
+    }
+    75% {
+        transform: rotate(2deg);
+    }
+    85% {
+        transform: rotate(-2deg);
+    }
+    92% {
+        transform: rotate(1deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.effect-ring {
+    -webkit-animation: ring 2s infinite linear;
+    -o-animation: ring 2s infinite linear;
+    animation: ring 2s infinite linear;
+}
+
+/* FLASH LOADING */
+@-webkit-keyframes loading {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.effect-loading {
+    -webkit-animation: loading 400ms infinite;
+    -o-animation: loading 400ms infinite;
+    animation: loading 400ms infinite;
+}
+
+/* =================================== /ANIMATION =================================== */
+
+/* =================================== MENU PANEL =================================== */
+
+.menu-top {
+    position: fixed;
+    width: calc(100% - 2em);
+    height: 11%;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    color: var(--white);
+    /*background-color: var(--themeColor07);*/
+    background-color: #8c7ae6;
+    z-index: 2;
+}
+
+.menu-top > .item.menu-title {
+    font-size: 1.25em;
+}
+
+.menu-top > .item.menu-toggle {
+    cursor: pointer;
+    font-size: 1.75em;
+}
+
+.menu-left {
+    position: fixed;
+    top: 11%;
+    width: 20%;
+    height: 89%;
+    overflow: auto;
+    color: var(--white);
+    /*background-color: var(--themeColor10);*/
+    background-color: #312850;
+    z-index: 2;
+}
+
+.menu-left > .container {
+    /*TODO: problema tem algo a ver com isso*/
+    padding: 0.25em 1em;
+    box-sizing: border-box;
+}
+
+.menu-left > .container > .user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.75em 0;
+    padding: 0.75em;
+    font-size: 0.75em;
+    color: var(--themeColor01);
+    /*background-color: var(--themeColor08);*/
+    background-color: #8c7ae6;
+}
+
+.menu-left > .container > .user > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 400%;
+    margin-right: 0.25em;
+}
+
+.menu-left > .container > .user > .identification > .name {
+    font-size: 125%;
+}
+
+.menu-left > .container a {
+    display: block;
+    padding: 0.75rem;
+    margin: 0.75rem 0;
+    color: var(--themeColor02);
+}
+
+.menu-left > .container a:hover {
+    color: var(--themeColor01);
+}
+
+.menu-left > .container a > .icon {
+    margin-right: 1rem;
+}
+
+.menu-left > .container a.active {
+    background-color: var(--themeColor08);
+}
+
+.menu-left > .container > .menu-items.active {
+    background-color: var(--themeColor09);
+}
+
+.menu-left > .container > span {
+    font-size: 125%;
+    padding: 0.75rem;
+    display: block;
+    text-transform: uppercase;
+}
+
+.menu-left > .container > .menu-items {
+    margin: 0.75em 0;
+}
+
+.menu-left > .container > .menu-items > .items {
+    font-size: 90%;
+    padding: 0.25em 0.75em;
+}
+
+.menu-left > .container > .menu-items > .menu-key {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em;
+    color: var(--themeColor02);
+    cursor: pointer;
+}
+
+.menu-left > .container > .menu-items > .menu-key i.icon:first-child {
+    margin-right: 1rem;
+}
+
+.menu-left > .container > .menu-items a {
+    padding: 0.75em;
+}
+
+.menu-left .menu-items .menu-key:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.panel-content {
+    box-sizing: border-box;
+    position: absolute;
+    width: 80%;
+    min-height: 89%;
+    top: 11%;
+    left: 20%;
+    background-color: var(--themeColor01);
+}
+
+/* AJEITAR */
+/*@media screen and (max-width: 1024px) {
+    .menu-left {
+        width: 100%;
+        display: none;
+    }
+    .content {
+        width: 100%;
+        left: 0;
+    }
+}*/
+
+/* =================================== /MENU PANEL =================================== */

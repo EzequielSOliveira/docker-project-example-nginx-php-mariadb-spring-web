@@ -1,0 +1,7 @@
+User-Agent: *
+
+Allow: /
+Disallow: /file
+Disallow: /image
+
+Sitemap: https://capedac.org/sitemap.xml

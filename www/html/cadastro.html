@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>CAPEDAC :: Cadastro</title>
+        <meta name="description" content="Preencha o cadastro digital de associado para tornar-se associado do CAPEDAC, após o cadastro entraremos em contato para confirmação.">
+        <meta name="keywords" content="CAPEDAC, Cadastro, Associado, Associação, Oficial, Rio Branco">
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" type="text/css" href="./css/index.css?v=1"/>
+        <link rel="stylesheet" type="text/css" href="./css/nunito.css?v=1"/>
+        <link rel="stylesheet" type="text/css" href="./css/font-awesome.css?v=1"/>
+        <link rel="stylesheet" type="text/css" href="./css/capedac.css?v=1"/>
+        <script type="text/javascript" src="./js/index.js?v=1"></script>
+        <script type="text/javascript" src="./js/capedac.js?v=1"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("add-dependent").addEventListener("change", function(event) {
+                    var dependentNumber = parseInt(event.target.value)
+                    if(dependentNumber == 0) {
+                        document.getElementById("list-dependent").innerHTML = '<div class="row"><div class="item"><p>Nenhum dependente registrado.</p></div></div>';
+                    }
+                    if(dependentNumber > 0) {
+                        document.getElementById("list-dependent").innerHTML = "";
+                        var modelDependent = document.getElementById("model-list-dependent");
+                        for(var i = 0; i < dependentNumber; i++) {
+                            var elementDependent = modelDependent.firstElementChild.cloneNode(true);
+                            var elementItem = elementDependent.querySelector("#dependent-item");
+                            elementItem.innerHTML = (i+1);
+                            var elementName = elementDependent.querySelector("[name='dependent[1][name]']");
+                            var elementBirth= elementDependent.querySelector("[name='dependent[1][birth]']");
+                            var elementSex = elementDependent.querySelector("[name='dependent[1][sex]']");
+                            elementName.setAttribute("name", "dependent[" + i + "][name]");
+                            elementName.id = "dependent[" + i + "][name]";
+                            elementBirth.setAttribute("name", "dependent[" + i + "][birth]");
+                            elementBirth.id = "dependent[" + i + "][birth]";
+                            elementSex.setAttribute("name", "dependent[" + i + "][sex]");
+                            elementSex.id = "dependent[" + i + "][sex]";
+                            document.getElementById("list-dependent").appendChild(elementDependent);
+                        }
+                    }
+                });
+
+                document.getElementById("add-disability").addEventListener("change", function(event) {
+                    var dependentNumber = parseInt(event.target.value)
+                    if(dependentNumber == 0) {
+                        document.getElementById("list-disability").innerHTML = '<div class="row"><div class="item"><p>Nenhuma deficiência registrada.</p></div></div>';
+                    }
+                    if(dependentNumber > 0) {
+                        document.getElementById("list-disability").innerHTML = "";
+                        var modelDependent = document.getElementById("model-list-disability");
+                        for(var i = 0; i < dependentNumber; i++) {
+                            var elementDependent = modelDependent.firstElementChild.cloneNode(true);
+                            var elementItem = elementDependent.querySelector("#disability-item");
+                            elementItem.innerHTML = (i+1);
+                            var elementName = elementDependent.querySelector("[name='disability[1][name]']");
+                            var elementBirth= elementDependent.querySelector("[name='disability[1][ICD]']");
+                            var elementSex = elementDependent.querySelector("[name='disability[1][degree]']");
+                            elementName.setAttribute("name", "disability[" + i + "][name]");
+                            elementName.id = "disability[" + i + "][name]";
+                            elementBirth.setAttribute("name", "disability[" + i + "][ICD]");
+                            elementBirth.id = "disability[" + i + "][ICD]";
+                            elementSex.setAttribute("name", "disability[" + i + "][degree]");
+                            elementSex.id = "disability[" + i + "][degree]";
+                            document.getElementById("list-disability").appendChild(elementDependent);
+                        }
+                    }
+                });
+
+                document.getElementById("register").addEventListener("click", function(event) {
+                    var isValid = true;
+                    var firstInput = null;
+                    var data = new FormData(document.querySelector("form"));
+                    for(var pair of data.entries()){
+                        var key = pair[0];
+                        var value = pair[1];
+                        console.log(key, value);
+                        if(value == "") {
+                            isValid = false;
+                            //console.log(key.includes("["));
+                            var cinput = key.includes("[") ? document.getElementById(key) : document.querySelector("[name=" + key + "]");
+                            //console.log(cinput);
+                            var dataValidationMessage = cinput.parentElement.querySelector("[data-validation-message]");
+                            if(dataValidationMessage) {
+                                dataValidationMessage.innerHTML = "Preencha este campo.";
+                                dataValidationMessage.classList.remove("hide");
+                                var input = dataValidationMessage.parentElement.querySelector("input");
+                                if(firstInput == null) {
+                                    firstInput = input;
+                                }
+                                //firstInput.push(input);
+                                //input.focus();
+                                //break;
+                            }
+                        } else {
+                            if(key == "birth") {
+                                if(value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/) != null) {
+                                    var dataDate = new Date(value.split("/").reverse().join("-"));
+                                    //console.log(dataDate, dataDate instanceof Date && !isNaN(dataDate.valueOf()));
+                                    if(dataDate instanceof Date && !isNaN(dataDate.valueOf())) {
+                                        //console.log("valid");
+                                        var currentDate = dataDate.getTime();
+                                        var dateMin = new Date('1000-01-01').getTime();
+                                        var dateMax = new Date('9999-12-31').getTime();
+
+                                        if (currentDate < dateMin || currentDate > dateMax) {
+                                            isValid = false;
+                                            var cinput = key.includes("[") ? document.getElementById(key) : document.querySelector("[name=" + key + "]");
+                                            var dataValidationMessage = cinput.parentElement.querySelector("[data-validation-message]");
+                                            if(dataValidationMessage) {
+                                                dataValidationMessage.innerHTML = "Digite uma data entre 01/01/1000 e 31/21/9999.";
+                                                dataValidationMessage.classList.remove("hide");
+                                                var input = dataValidationMessage.parentElement.querySelector("input");
+                                                if(firstInput == null) {
+                                                    firstInput = input;
+                                                }
+                                                //firstInput.push(input);
+                                                //input2.focus();
+                                                //break;
+                                            }
+                                        } else {
+                                            var cinput = key.includes("[") ? document.getElementById(key) : document.querySelector("[name=" + key + "]");
+                                            var dataValidationMessage = cinput.parentElement.querySelector("[data-validation-message]");
+                                            if(dataValidationMessage) {
+                                                if(!dataValidationMessage.classList.contains("hide")) {
+                                                    dataValidationMessage.classList.add("hide");
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        //console.log("invalid");
+                                        isValid = false;
+                                        var cinput = key.includes("[") ? document.getElementById(key) : document.querySelector("[name=" + key + "]");
+                                        var dataValidationMessage = cinput.parentElement.querySelector("[data-validation-message]");
+                                        if(dataValidationMessage) {
+                                            dataValidationMessage.innerHTML = "Digite uma data válida.";
+                                            dataValidationMessage.classList.remove("hide");
+                                            var input = dataValidationMessage.parentElement.querySelector("input");
+                                            if(firstInput == null) {
+                                                firstInput = input;
+                                            }
+                                            //firstInput.push(input);
+                                            //input2.focus();
+                                            //break;
+                                        }
+                                    }
+                                } else {
+                                    //console.log("invalid 2");
+                                    isValid = false;
+                                    var cinput = key.includes("[") ? document.getElementById(key) : document.querySelector("[name=" + key + "]");
+                                    var dataValidationMessage = cinput.parentElement.querySelector("[data-validation-message]");
+                                    if(dataValidationMessage) {
+                                        dataValidationMessage.innerHTML = "Digite uma data válida.";
+                                        dataValidationMessage.classList.remove("hide");
+                                        var input = dataValidationMessage.parentElement.querySelector("input");
+                                        if(firstInput == null) {
+                                            firstInput = input;
+                                        }
+                                        //firstInput.push(input);
+                                        //input2.focus();
+                                        //break;
+                                    }
+                                }
+                            } else {
+                                if(key == "document") {
+                                    if(value.length < 11) {
+                                        isValid = false;
+                                        var cinput = key.includes("[") ? document.getElementById(key) : document.querySelector("[name=" + key + "]");
+                                        var dataValidationMessage = cinput.parentElement.querySelector("[data-validation-message]");
+                                        if(dataValidationMessage) {
+                                            dataValidationMessage.innerHTML = "O CPF precisa ter 11 números.";
+                                            dataValidationMessage.classList.remove("hide");
+                                            var input = dataValidationMessage.parentElement.querySelector("input");
+                                            if(firstInput == null) {
+                                                firstInput = input;
+                                            }
+                                            //firstInput.push(input);
+                                            //input2.focus();
+                                            //break;
+                                        }
+                                    } else {
+                                        var cinput = key.includes("[") ? document.getElementById(key) : document.querySelector("[name=" + key + "]");
+                                        var dataValidationMessage = cinput.parentElement.querySelector("[data-validation-message]");
+                                        if(dataValidationMessage) {
+                                            if(!dataValidationMessage.classList.contains("hide")) {
+                                                dataValidationMessage.classList.add("hide");
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    var cinput = key.includes("[") ? document.getElementById(key) : document.querySelector("[name=" + key + "]");
+                                    var dataValidationMessage = cinput.parentElement.querySelector("[data-validation-message]");
+                                    if(dataValidationMessage) {
+                                        if(!dataValidationMessage.classList.contains("hide")) {
+                                            dataValidationMessage.classList.add("hide");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        /*if(firstInput == null) {
+                            
+                        } else {
+                            firstInput.focus();
+                            firstInput = null;
+                        }*/
+                        
+                        //end 
+                    }
+                    
+                    if(firstInput != null) {
+                        firstInput.focus();
+                        firstInput = null;
+                    }
+                    
+                    //console.log(firstInput);
+                    
+                    if(isValid) {
+                        var http = new XMLHttpRequest();
+                        http.open('POST', '/application/index.php?service=Cadastrar', true);
+                        http.onreadystatechange = function() {
+                            if (http.readyState == 4 && http.status == 200) {
+                                //console.log(JSON.parse(http.responseText));
+                                var response = JSON.parse(http.responseText);
+                                if(response.success) {
+                                    document.querySelector("form").reset();
+                                    window.location = "/bemvindo.html";
+                                } else {
+                                    var alert = document.getElementById("alert");
+                                    alert.classList.add("danger");
+                                    alert.classList.remove("hide");
+                                    alert.querySelector(".alert-title").innerHTML = response.title;
+                                    alert.querySelector(".alert-message").innerHTML = response.message;
+                                }
+                            }
+                        }
+                        http.send(data);
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="alert hide" id="alert">
+            <span class="alert-close">x</span>
+            <div class="alert-content">
+                <h3 class="alert-title">Title of Message</h3>
+                <p class="alert-message">Message</p>
+            </div>
+        </div>
+        <div id="model-list-dependent" class="hide">
+            <div class="row">
+                <div class="item">
+                    <fieldset>
+                        <legend>Dependente <span id="dependent-item"></span></legend>
+                        <div class="row">
+                            <div class="item">
+                                <label for="name">Nome Completo:</label>
+                                <input type="text" name="dependent[1][name]" id="name" data-validation="name" />
+                                <p class="danger margin-top-1 hide" data-validation-message="name"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item">
+                                <label for="birth">Nascimento:</label>
+                                <input type="text" name="dependent[1][birth]" id="birth" data-validation="date" />
+                                <p class="danger margin-top-1 hide" data-validation-message="birth"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item">
+                                <label for="sex">Gênero:</label>
+                                <select name="dependent[1][sex]" id="sex">
+                                <option value="1">Masculino</option>
+                                <option value="2">Feminino</option>
+                                <option value="3">Outro</option>
+                            </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <div id="model-list-disability" class="hide">
+            <div class="row">
+                <div class="item">
+                    <fieldset>
+                        <legend>Deficiência <span id="disability-item"></span></legend>
+                        <div class="row">
+                            <div class="item">
+                                <label for="name">Nome da Deficiência:</label>
+                                <input type="text" name="disability[1][name]" id="name" data-validation="name" />
+                                <p class="danger margin-top-1 hide" data-validation-message="name"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item">
+                                <label for="ICD">CID:</label>
+                                <input type="text" name="disability[1][ICD]" id="ICD" data-validation="cid" />
+                                <p class="danger margin-top-1 hide" data-validation-message="ICD"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="item">
+                                <label for="degree">Grau de Deficiência:</label>
+                                <select name="disability[1][degree]" id="degree">
+                                    <option value="1">Baixo</option>
+                                    <option value="2">Médio</option>
+                                    <option value="3">Alto</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header>
+            <div class="navigation full content">
+                <div class="content-row">
+                    <div class="content">
+                        <div class="brand">
+                            <a href="./index.html">CAPEDAC</a>
+                            <svg class="toggle" id="toogle-navigation-full-content" version="1.1" xmlns="http://www.w3.org/2000/svg viewBox="0 0 24 24" xml:space="preserve">
+                                <path d="M1.6,1.6h20.8V5H1.6V1.6 M1.6,10.2h20.8v3.4H1.6V10.2 M1.6,18.8h20.8v3.4H1.6V18.8z"/>
+                            </svg>
+                        </div>
+                        <div class="link hide">
+                            <a href="./noticia.html">Notícias</a>
+                            <a href="./cadastro.html">Cadastro</a>
+                            <a href="./depoimento.html">Depoimentos</a>
+                            <a href="./estatuto.html">Estatuto</a>
+                            <a href="./historia.html">História</a>
+                            <a href="./doacao.html">Doação</a>
+                            <a href="./projeto.html">Projetos</a>
+                            <a href="./voluntario.html">Voluntário</a>
+                            <a href="./denuncia.html">Denunciar</a>
+                            <a href="./biblioteca.html">Bibliotéca</a>
+                            <a href="./contato.html">Contato</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-test">
+                <a href="./acesso.html"><img src="./image/logo/capedac-logo.svg" title="Logo do CAPEDAC" alt="Um círculo externo de cor azul com a palavra CAPEDAC escrito e outro círculo interno de cor vermelho com um cadeirante dentro" style="width: 4em;"/></a>
+            </div>
+        </header>
+        <main>
+            <div class="content-row">
+                <div class="row">
+                    <div class="item">
+                        <h1>Cadastro de Associado</h1>
+                        <p>Você pode se tornar um associado do CAPEDAC preenchendo o formulário de cadastro.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="item">
+                        <form method="POST" action="">
+                            <fieldset>
+                                <legend>Formulário de Cadastro</legend>
+                                <div class="row">
+                                    <div class="item">
+                                        <p class="bold">Dados Pessoais</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="name">Nome:</label>
+                                        <input type="text" name="name" id="name" data-validation="name" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="name"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="birth">Data de Nascimento:</label>
+                                        <input type="text" name="birth" id="birth" data-validation="date" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="birth"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="sex">Gênero:</label>
+                                        <select name="sex" id="sex">
+                                            <option value="1">Masculino</option>
+                                            <option value="2">Feminino</option>
+                                            <option value="3">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="identity">Número do RG:</label>
+                                        <input type="text" name="identity" id="identity" data-validation="rg" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="identity"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="document">Número do CPF:</label>
+                                        <input type="text" name="document" id="document" data-validation="cpf" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="document"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <p class="bold">Dados de Nascimento</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="nationality">País que Nasceu:</label>
+                                        <input type="text" name="nationality" id="nationality" data-validation="location" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="nationality"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="naturalness">Estado que Nasceu:</label>
+                                        <input type="text" name="naturalness" id="naturalness" data-validation="location" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="naturalness"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="place">Cidade que Nasceu:</label>
+                                        <input type="text" name="place" id="place" data-validation="location" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="place"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <p class="bold">Dados Socioeconomicos</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="maritial">Estado Civil:</label>
+                                        <select name="maritial" id="maritial">
+                                            <option value="1">Solteiro</option>
+                                            <option value="2">Casado</option>
+                                            <option value="3">Separado</option>
+                                            <option value="4">Divorciado</option>
+                                            <option value="5">Viúvo</option>
+                                            <option value="6">Amasiado</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="professional">Situação Profissional:</label>
+                                        <select name="professional" id="professional">
+                                            <option value="1">Desempregado</option>
+                                            <option value="2">Empregado</option>
+                                            <option value="3">Aposentado</option>
+                                            <option value="4">Autônomo</option>
+                                            <option value="5">Benefício Social</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="academic">Situação Educacional:</label>
+                                        <select name="academic" id="academic">
+                                            <option value="1">Não Alfabetizado</option>
+                                            <option value="2">Ensino Fundamental Incompleto</option>
+                                            <option value="3">Ensino Fundamental Completo</option>
+                                            <option value="4">Ensino Médio Incompleto</option>
+                                            <option value="5">Ensino Médio Completo</option>
+                                            <option value="6">Ensino Superior Incompleto</option>
+                                            <option value="7">Ensino Superior Completo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <p class="bold">Dados de Contato</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="email">Email:</label>
+                                        <input type="text" name="email" id="email" data-validation="email" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="email"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="phone">Celular ou Telefone (Wattsapp):</label>
+                                        <input type="text" name="phone" id="phone" data-validation="phone" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="phone"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="cell">Celular ou Telefone:</label>
+                                        <input type="text" name="cell" id="cell" data-validation="phone" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="cell"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <p class="bold">Dados de Endereço</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="country">País:</label>
+                                        <input type="text" name="country" id="country" data-validation="location" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="country"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="state">Estado:</label>
+                                        <input type="text" name="state" id="state" data-validation="location" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="state"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="city">Cidade:</label>
+                                        <input type="text" name="city" id="city" data-validation="location" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="city"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="district">Bairro:</label>
+                                        <input type="text" name="district" id="district" data-validation="location" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="district"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="location">Localidade:</label>
+                                        <input type="text" name="location" id="location" data-validation="location" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="location"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="number">Número:</label>
+                                        <input type="text" name="number" id="number" data-validation="number" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="number"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="code">CEP:</label>
+                                        <input type="text" name="code" id="code" data-validation="cep" />
+                                        <p class="danger margin-top-1 hide" data-validation-message="code"></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <p class="bold">Registro de Dependentes</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="add-dependent">Número de Dependentes:</label>
+                                        <select id="add-dependent">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="list-dependent">
+                                    <div class="row">
+                                        <div class="item">
+                                            <p>Nenhum dependente registrado.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <p class="bold">Registro de Deficiência</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <label for="add-disability">Número de Deficiências:</label>
+                                        <select id="add-disability">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="list-disability">
+                                    <div class="row">
+                                        <div class="item">
+                                            <p>Nenhuma deficiência registrada.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="item">
+                                        <button type="button" class="button button-success" id="register">Realizar Cadastro</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="content-row">
+                <?php if(isset($_SESSION['LGPD']) && $_SESSION['LGPD'] === true) { ?>
+                    <div class="row">
+                        <div class="item">
+                            <form method="POST" action="">
+                                <input type="hidden" name="CSRFToken" value="<?php echo $security->CSRFToken ?? null; ?>">
+                                <fieldset>
+                                    <legend>Cadastro de Associado</legend>
+                                    <div class="row">
+                                        <div class="item">
+                                            <?php if(count(get_object_vars($validation ?? new \stdClass())) != 0) { ?>
+                                                <p class="danger">Erro ao Realizar Cadastro, Revise seu Cadastro</p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <p class="bold">Dados Pessoais</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="nome">Nome:</label>
+                                            <input type="text" name="nome" id="nome" placeholder="Digite seu nome completo"
+                                                value="<?php echo $input->nome ?? null; ?>"/>
+                                            <?php if(isset($validation->nome)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->nome ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="nascimento">Data de Nascimento:</label>
+                                            <input type="text" name="nascimento" id="nascimento"
+                                                placeholder="Digite sua data de nascimento" value="<?php echo $input->nascimento ?? null; ?>"
+                                                data-validation="date"/>
+                                            <?php if(isset($validation->nascimento)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->nascimento ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <?php $sexos = [
+                                                ['id' => 1, 'nome' => 'Masculino'],
+                                                ['id' => 2, 'nome' => 'Feminino']
+                                            ]; ?>
+                                            <label for="sexo">Sexo:</label>
+                                            <select name="sexo" id="sexo">
+                                                <?php if(empty($sexos)) { ?>
+                                                    <option value="">Nenhum Sexo Encontrado</option>
+                                                <?php } else { ?>
+                                                    <?php foreach ($sexos ?? [] as $sexo) { ?>
+                                                        <option value="<?php echo $sexo['id'] ?? null; ?>"<?php echo (($sexo['id'] ?? null) == ($input->sexo ?? null)) ? ' selected' : null; ?>><?php echo $sexo['nome'] ?? null; ?></option>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </select>
+                                            <?php if(isset($validation->sexo)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->sexo ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="rg">RG:</label>
+                                            <input type="text" name="rg" id="rg"
+                                                placeholder="Digite seu rg" value="<?php echo $input->rg ?? null; ?>"/>
+                                            <?php if(isset($validation->rg)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->rg ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="cpf">CPF:<br/>(somente números)</label>
+                                            <input type="text" name="cpf" id="cpf"
+                                                placeholder="Digite seu cpf" value="<?php echo $input->cpf ?? null; ?>"/>
+                                            <?php if(isset($validation->cpf)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->cpf ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <p class="bold">Dados de Contato</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="email">Email:</label>
+                                            <input type="email" name="email" id="email"
+                                                placeholder="Digite seu email" value="<?php echo $input->email ?? null; ?>"
+                                                data-validation="email"/>
+                                            <?php if(isset($validation->email)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->email ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="telefone">Celular ou Telefone:<br />(preferência wattsapp)</label>
+                                            <input type="text" name="telefone" id="telefone"
+                                                placeholder="Digite seu celular ou telefone" value="<?php echo $input->telefone ?? null; ?>"
+                                                data-validation="number"/>
+                                            <?php if(isset($validation->telefone)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->telefone ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="celular">Celular ou Telefone:</label>
+                                            <input type="text" name="celular" id="celular"
+                                                placeholder="Digite seu celular ou telefone" value="<?php echo $input->celular ?? null; ?>"
+                                                data-validation="number"/>
+                                            <?php if(isset($validation->celular)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->celular ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <p class="bold">Dados de Nascimento</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="nacionalidade">Nacionalidade:<br/>(nome do país onde você
+                                                nasceu)</label>
+                                            <input type="text" name="nacionalidade" id="nacionalidade"
+                                                placeholder="Digite sua nacionalidade" value="<?php echo $input->nacionalidade ?? null; ?>"
+                                                data-validation="word"/>
+                                            <?php if(isset($validation->nacionalidade)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->nacionalidade ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="naturalidade">Naturalidade:<br/>(nome da cidade onde você
+                                                nasceu)</label>
+                                            <input type="text" name="naturalidade" id="naturalidade"
+                                                placeholder="Digite sua naturalidade" value="<?php echo $input->naturalidade ?? null; ?>"
+                                                data-validation="alphanumeric"/>
+                                            <?php if(isset($validation->naturalidade)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->naturalidade ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="estadoNatural">Estado Natural:<br />(estado onde você nasceu)</label>
+                                            <select id="estadoNatural" name="estadoNatural">
+                                                <?php if(empty($entity->Estado ?? null)) { ?>
+                                                    <option value="">Nenhum Estado Encontrado</option>
+                                                <?php } else { ?>
+                                                    <?php foreach ($entity->Estado ?? [] as $estado) { ?>
+                                                        <option value="<?php echo $estado->id ?? null; ?>"<?php echo (($estado->id ?? null) == ($input->estadoNatural ?? null)) ? ' selected' : null; ?>><?php echo $estado->nome ?? null; ?></option>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </select>
+                                            <?php if(isset($validation->estadoNatural)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->estadoNatural ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <p class="bold">Dados Socioeconomicos</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="estadoCivil">Estado Civil:</label>
+                                            <select name="estadoCivil" id="estadoCivil">
+                                                <?php if(empty($entity->EstadoCivil)) { ?>
+                                                    <option value="">Nenhum Estado Civil Encontrado</option>
+                                                <?php } else { ?>
+                                                    <?php foreach ($entity->EstadoCivil ?? [] as $estadoCivil) { ?>
+                                                        <option value="<?php echo $estadoCivil->id ?? null; ?>"<?php echo (($estadoCivil->id ?? null) == ($input->estadoCivil ?? null)) ? ' selected' : null; ?>><?php echo $estadoCivil->nome ?? null; ?></option>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </select>
+                                            <?php if(isset($validation->EstadoCivil)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->EstadoCivil ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="situacaoProfissional">Situacao Profissional:</label>
+                                            <select name="situacaoProfissional" id="situacaoProfissional">
+                                                <?php if(empty($entity->SituacaoProfissional)) { ?>
+                                                    <option value="">Nenhuma Situação Profissional Encontrada</option>
+                                                <?php } else { ?>
+                                                    <?php foreach ($entity->SituacaoProfissional ?? [] as $situacaoProfissional) { ?>
+                                                        <option value="<?php echo $situacaoProfissional->id ?? null; ?>"<?php echo (($situacaoProfissional->id ?? null) == ($input->situacaoProfissional ?? null)) ? ' selected' : null; ?>><?php echo $situacaoProfissional->nome ?? null; ?></option>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </select>
+                                            <?php if(isset($validation->situacaoProfissional)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->situacaoProfissional ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="formacaoAcademica">Nível de Escolariade:</label>
+                                            <select name="formacaoAcademica" id="formacaoAcademica">
+                                                <?php if(empty($entity->FormacaoAcademica)) { ?>
+                                                    <option value="">Nenhuma Situação Profissional Encontrada</option>
+                                                <?php } else { ?>
+                                                    <?php foreach ($entity->FormacaoAcademica ?? [] as $formacaoAcademica) { ?>
+                                                        <option value="<?php echo $formacaoAcademica->id ?? null; ?>"<?php echo (($formacaoAcademica->id ?? null) == ($input->formacaoAcademica ?? null)) ? ' selected' : null; ?>><?php echo $formacaoAcademica->nome ?? null; ?></option>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </select>
+                                            <?php if(isset($validation->formacaoAcademica)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->formacaoAcademica ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <p class="bold">Dados de Endereço</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="estado">Estado:</label>
+                                            <select id="estado" name="estado">
+                                                <?php if(empty($entity->Estado)) { ?>
+                                                    <option value="">Nenhum Estado Encontrado</option>
+                                                <?php } else { ?>
+                                                    <?php foreach ($entity->Estado ?? [] as $estado) { ?>
+                                                        <option value="<?php echo $estado->id ?? null; ?>"<?php echo (($estado->id ?? null) == ($input->estado ?? null)) ? ' selected' : null; ?>><?php echo $estado->nome ?? null; ?></option>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            </select>
+                                            <?php if(isset($validation->estado)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->estado ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="cidade">Cidade</label>
+                                            <input type="text" name="cidade" id="cidade" placeholder="Digite sua cidade"
+                                                value="<?php echo $input->cidade ?? null; ?>" data-validation="alphanumeric"/>
+                                            <?php if(isset($validation->cidade)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->cidade ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="bairro">Bairro:</label>
+                                            <input type="text" name="bairro" id="bairro" placeholder="Digite seu bairro"
+                                                value="<?php echo $input->bairro ?? null; ?>" data-validation="alphanumeric"/>
+                                            <?php if(isset($validation->bairro)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->bairro ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="cep">Cep:</label>
+                                            <input type="text" name="cep" id="cep" placeholder="Digite seu cep"
+                                                value="<?php echo $input->cep ?? null; ?>" data-validation="number"/>
+                                            <?php if(isset($validation->cep)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->cep ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="localidade">Localidade:<br/>(exemplo: Rua, Travessa, Ramal)</label>
+                                            <input type="text" name="localidade" id="localidade" placeholder="Digite sua localidade"
+                                                value="<?php echo $input->localidade ?? null; ?>" data-validation="alphanumeric"/>
+                                            <?php if(isset($validation->localidade)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->localidade ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="numero">Número da Casa:</label>
+                                            <input type="text" name="numero" id="numero" placeholder="Digite seu número"
+                                                value="<?php echo $input->numero ?? null; ?>" data-validation="alphanumeric"/>
+                                            <?php if(isset($validation->numero)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->numero ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <label for="complemento">Complemento: (opcional)<br/>(exemplo: ponto de referência, andar, sala)</label>
+                                            <input type="text" name="complemento" id="complemento" placeholder="Digite seu complemento"
+                                                value="<?php echo $input->complemento ?? null; ?>" data-validation="alphanumeric"/>
+                                            <?php if(isset($validation->complemento)) { ?>
+                                                <p class="danger margin-top-1"><?php echo $validation->complemento ?? null; ?></p>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <fieldset>
+                                                <legend>Cadastro de Dependentes<br />(opcional)</legend>
+                                                <?php for($i = 0; $i < 5; $i++) { ?>
+                                                    <div class="row">
+                                                        <div class="item">
+                                                            <p class="bold">Dependente <?php echo $i + 1; ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="item">
+                                                            <label>Nome:</label>
+                                                            <input type="text" name="dependente[<?php echo $i; ?>][nome]" placeholder="Digite o nome do dependente" value="<?php echo $input->dependente[$i]['nome'] ?? null; ?>"/>
+                                                            <?php if(isset($validation->dependente[$i]['nome'])) { ?>
+                                                                <p class="danger margin-top-1"><?php echo $validation->dependente[$i]['nome'] ?? null; ?></p>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="item">
+                                                            <label>Nascimento:</label>
+                                                            <input type="text" name="dependente[<?php echo $i; ?>][nascimento]" placeholder="Digite a data de nacimento" data-validation="date" value="<?php echo $input->dependente[$i]['nascimento'] ?? null; ?>"/>
+                                                            <?php if(isset($validation->dependente[$i]['nascimento'])) { ?>
+                                                                <p class="danger margin-top-1"><?php echo $validation->dependente[$i]['nascimento'] ?? null; ?></p>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="item">
+                                                            <?php $sexos = [
+                                                                ['id' => 1, 'nome' => 'Masculino'],
+                                                                ['id' => 2, 'nome' => 'Feminino']
+                                                            ]; ?>
+                                                            <label>Sexo:</label>
+                                                            <select name="dependente[<?php echo $i; ?>][sexo]">
+                                                                <?php if(empty($sexos)) { ?>
+                                                                    <option value="">Nenhum Sexo Encontrado</option>
+                                                                <?php } else { ?>
+                                                                    <?php foreach ($sexos ?? [] as $sexo) { ?>
+                                                                        <option value="<?php echo $sexo['id'] ?? null; ?>"<?php echo (($sexo['id'] ?? null) == ($input->dependente[$i]['sexo'] ?? null)) ? ' selected' : null; ?>><?php echo $sexo['nome'] ?? null; ?></option>
+                                                                    <?php } ?>
+                                                                <?php } ?>
+                                                            </select>
+                                                            <?php if(isset($validation->dependente[$i]['sexo'])) { ?>
+                                                                <p class="danger margin-top-1"><?php echo $validation->dependente[$i]['sexo'] ?? null; ?></p>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <fieldset>
+                                                <legend>Cadastro de Deficiência<br />(opcional)</legend>
+                                                <?php for($i = 0; $i < 5; $i++) { ?>
+                                                    <div class="row">
+                                                        <div class="item">
+                                                            <p class="bold">Deficiência <?php echo $i + 1; ?></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="item">
+                                                            <label>Nome:</label>
+                                                            <input type="text" name="deficiencia[<?php echo $i; ?>][cid]" placeholder="Digite o CID" value="<?php echo $input->deficiencia[$i]['cid'] ?? null; ?>"/>
+                                                            <?php if(isset($validation->deficiencia[$i]['cid'])) { ?>
+                                                                <p class="danger margin-top-1"><?php echo $validation->deficiencia[$i]['cid'] ?? null; ?></p>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="item">
+                                                            <?php $grauDeficiencias = [
+                                                                ['id' => 1, 'nome' => 'Baixo'],
+                                                                ['id' => 2, 'nome' => 'Médio'],
+                                                                ['id' => 3, 'nome' => 'Alto']
+                                                            ]; ?>
+                                                            <label>Grau de Deficiência:</label>
+                                                            <select name="deficiencia[<?php echo $i; ?>][grauDeficiencia]">
+                                                                <?php if(empty($grauDeficiencias)) { ?>
+                                                                    <option value="">Nenhuma Opção Encontrada</option>
+                                                                <?php } else { ?>
+                                                                    <?php foreach ($grauDeficiencias ?? [] as $grauDeficiencia) { ?>
+                                                                        <option value="<?php echo $grauDeficiencia['id'] ?? null; ?>"<?php echo (($grauDeficiencia['id'] ?? null) == ($input->deficiencia[$i]['grauDeficiencia'] ?? null)) ? ' selected' : null; ?>><?php echo $grauDeficiencia['nome'] ?? null; ?></option>
+                                                                    <?php } ?>
+                                                                <?php } ?>
+                                                            </select>
+                                                            <?php if(isset($validation->deficiencia[$i]['grauDeficiencia'])) { ?>
+                                                                <p class="danger margin-top-1"><?php echo $validation->deficiencia[$i]['grauDeficiencia'] ?? null; ?></p>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+                                                <?php } ?>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="item">
+                                            <button class="button button-success-alt">Realizar Cadastro</button>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="row">
+                        <div class="item">
+                            <h1>Seja um Associado do CAPEDAC</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="item">
+                            <p class="bold">Aceite os termos para realizar o cadastro de associado a seguir:</p>
+                            <p>Em cumprimento à LEI Nº 13.709, DE 14 DE AGOSTO DE 2018.</p>
+                            <p>A coleta de dados no cadastro de associado tem a finalidade, de atender a legislação e o estatuto do CAPEDAC, mas também utilizar dos dados para gerar relatórios para analise de informações em relação aos associados, além da garantia de não expor nenhum dado informado, garantindo a privacidade e zelo em relação aos dados fornecidos.</p>
+                            <p>Ao preencher o cadastro de associado com objetivo de associar-se ao CAPEDAC, você está concordando com os termos do estatuto do CAPEDAC.</p>
+                            <p>Para ler o estatuto do CAPEDAC <a href="../file/estatuto-capedac.pdf" title="Estatuto do CAPEDAC" class="link default" target="_blank">clique aqui</a>.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="item">
+                            <a href="./cadastro?lgpd=true" title="Concordar com termos e ir ao cadastro" class="button button-success">Concordo, continuar para relizar cadastro</a>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>-->
+        </main>
+        <footer>
+            <div class="content-row">
+                <div class="row">
+                    <div class="item center">
+                        <div>
+                            <h3>CAPED<span class="color theme">AC</span></h3>
+                            <p class="margin-top-1">Divulge nossas ideias nas redes sociais e contribua com nossa causa para que mais pessoas sejam afetadas.</p>
+                            <div class="navigation sample social margin-top-1">
+                                <a href="https://www.facebook.com/Capedacoficial/" title="Facebook do CAPEDAC" target="_blank" rel="nofollow"><img src="./image/icon/facebook.svg" title="Logo do facebook" alt="Uma letra F em um fundo azul"/></a>
+                                <a href="https://www.instagram.com/capedac_oficial/" title="Instagram do CAPEDAC" rel="nofollow"><img src="./image/icon/instagram.svg" title="Logo do instagram" alt="Um desenho simples de uma câmera fotográfica, pintada com um degradê das cores roxo e laranja"/></a>
+                                <a href="https://twitter.com/Capedacoficial" title="Twitter do CAPEDAC" target="_blank" rel="nofollow"><img src="./image/icon/twitter.svg" title="Logo do twitter" alt="Um passarinho de cor azul"/></a>
+                                <a href="https://www.youtube.com/channel/UCKS08TtEsAZlPZ72PL1whbw" title="Youtube do CAPEDAC" target="_blank" rel="nofollow"><img src="./image/icon/youtube.svg" title="Logo do youtube" alt="Um símbolo de player com fundo vermelho"/></a>
+                                <a href="https://api.whatsapp.com/send?phone=5568992076114" title="Whatsapp do CAPEDAC" target="_blank" rel="nofollow"><img src="./image/icon/whatsapp.svg" title="Logo do whatsapp" alt="Um telefone envolto de um balão de mensagem"/></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item center">
+                        <div class="navigation sample link">
+                            <h4>Links Úteis</h4>
+                            <a href="./index.html" title="Página inicial do site"><i class="fa fa-bullseye"></i> Página Inicial</a>
+                            <a href="./historia.html" title="História do CAPEDAC"><i class="fa fa-bullseye"></i>História do CAPEDAC</a>
+                            <a href="./projeto.html" title="Projetos do CAPEDAC"><i class="fa fa-bullseye"></i>Conheça Nossos Projetos</a>
+                            <a href="./doacao.html" title="Realizar doação"><i class="fa fa-bullseye"></i>Faça uma Doação</a>
+                        </div>
+                    </div>
+                    <div class="item center">
+                        <div class="navigation sample list">
+                            <h4>Endereço e Contato</h4>
+                            <p>Terminal Urbano, Av. Brasil, 604 - Centro</p>
+                            <p>Sala anexo ao RBTRANS, Rio Branco, Acre</p>
+                            <p><a href="tel:5568992076114" title="Telefone de contato">+55 (68) 9 9207 - 6114</a></p>
+                            <p><a href="tel:5568992076114" title="Telefone de contato">+55 (68) 9 9207 - 6114</a></p>
+                            <p><a href="mailto:capedac.ac@gmail.com" title="Email de contato">capedac.ac@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="item center">
+                        <div>
+                            <h4>Sobre a Organização</h4>
+                            <p class="margin-top-1">O Centro de Apoio a Pessoa com Deficiência Física do Acre agradece o seu apoio, continue conosco nessa missão.</p>
+                            <p class="margin-top-1"><span>Para mais informações:</span><a href="mailto:capedac.ac@gmail.com" title="Email de contato"><span>capedac.ac@gmail.com</span></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="background theme">
+                <article class="row align center">
+                    <div class="item center">
+                        <span><a href="./protecao.html" title="Política de proteção de dados">Política de Proteção de Proteção de Dados</a></span>
+                    </div>
+                </article>
+            </section>
+        </footer>
+        <style>
+            @media (max-width: 1024px) {
+                [vw] [vw-access-button] .access-button {
+                    width: 100% !important;
+                }
+            }
+        </style>
+        <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+                <div class="vw-plugin-top-wrapper"></div>
+            </div>
+        </div>
+        <script src="https://vlibras.gov.br/app/vlibras-plugin.js?v=1"></script>
+        <script>
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+        </script>
+    </body>
+</html>

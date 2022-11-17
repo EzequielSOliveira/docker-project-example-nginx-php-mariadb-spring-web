@@ -1,0 +1,11 @@
+# To solve permission erros
+sudo groupadd docker
+
+sudo usermod -aG docker $USER
+
+newgrp docker
+
+# if still error persist: reboot
+
+# To solve max depth problems
+docker system prune -a

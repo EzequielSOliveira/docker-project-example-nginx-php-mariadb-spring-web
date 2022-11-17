@@ -1,0 +1,33 @@
+# Delete all container builds
+docker system prune -a
+
+# Build containers from docker-compose.yml
+docker compose build
+
+docker compose up --build -d
+
+# Start stopped containers
+docker compose up
+
+docker compose up -d
+
+# Stop all containers
+docker stop $(docker ps -q)
+
+# Restart all containers
+docker restart $(docker ps -q)
+
+docker compose down -v
+
+docker exec -it {CONTAINER_ID} bash
+
+docker compose up --build -d --remove-orphans
+
+docker compose up -d
+
+docker version
+
+docker compose version
+
+# If you need to stop and remove all containers, networks, and all images used by any service in docker-compose.yml
+docker-compose down --rmi all

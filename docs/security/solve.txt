@@ -1,0 +1,2 @@
+can a hacker, try brute force attack on services variable (/application/index.php?service=),
+may can use services aliases like /application/index.php?service=List -> /application/index.php?service=47689
